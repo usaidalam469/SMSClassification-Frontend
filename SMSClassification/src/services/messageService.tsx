@@ -1,7 +1,7 @@
 // Function to classify a message by sending it to the backend API
 export const classifyMessage = async (message: string) => {
     // Make a POST request to the Django backend API at the specified endpoint
-    const response = await fetch('http://localhost:8000/api/predict', {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_API_URL}/api/predict`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
