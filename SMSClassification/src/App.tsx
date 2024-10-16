@@ -1,44 +1,20 @@
 import { useState } from "react";
 import MessageForm from "./components/MessageForm"
 import { Row, Col, Card } from 'react-bootstrap';
+import { useMessageClassifier } from "./hooks/useMessageClassifier";
+
 
 const App: React.FC = () => {
   const [prediction, setPrediction] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setLoading] = useState(false);
 
-  // Function to handle form submission and API call
-  const handleSubmit = async (message: string) => {
-    try {
-      // Making a POST request to our Django backend API
-      setLoading(true);
-      const response = await fetch('http://localhost:8000/api/predict', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message }),
-      });
+  // Using the custom hook to handle the classification API call
+  const { mutate, isLoading } = useMessageClassifier(setPrediction, setError);
 
-      if (!response.ok) {
-        throw new Error('Error while making API call');
-      }
-
-      const data = await response.json();
-
-      // Update the prediction result from the API response
-      setPrediction(data.prediction);
-      setError(null);
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
-      setError('Failed to fetch the prediction');
-      setPrediction('')
-    }
-    finally
-    {
-      setLoading(false);
-    }
+  // Function to handle form submission
+  const handleSubmit = (message: string) => {
+    // Trigger the mutation when form is submitted
+    mutate(message);
   };
 
   return (

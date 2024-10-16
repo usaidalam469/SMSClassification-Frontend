@@ -1,0 +1,20 @@
+import { useMutation } from 'react-query';
+import { classifyMessage } from '../services/messageService';
+
+
+// Custom hook that uses React Query's useMutation hook to handle message classification
+// It accepts two setter functions: setPrediction and setError, which are used to update the state
+export const useMessageClassifier = (setPrediction: React.Dispatch<React.SetStateAction<string>>, 
+    setError: React.Dispatch<React.SetStateAction<string | null>>) => {
+    // useMutation hook is used to manage asynchronous tasks, in this case, calling the classifyMessage function (API call)
+    return useMutation(classifyMessage, {
+    onSuccess: (data) => {
+      setPrediction(data.prediction);
+      setError(null);
+    },
+    onError: () => {
+      setError('Failed to fetch the prediction');
+      setPrediction('');
+    }
+  });
+};
