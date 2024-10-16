@@ -7,7 +7,7 @@ import { classifyMessage } from '../services/messageService';
 export const useMessageClassifier = (setPrediction: React.Dispatch<React.SetStateAction<string>>, 
     setError: React.Dispatch<React.SetStateAction<string | null>>) => {
     // useMutation hook is used to manage asynchronous tasks, in this case, calling the classifyMessage function (API call)
-    return useMutation(classifyMessage, {
+    return useMutation(({ message, model }: { message: string; model: string }) => classifyMessage(message, model), {
     onSuccess: (data) => {
       setPrediction(data.prediction);
       setError(null);

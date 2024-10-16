@@ -12,9 +12,9 @@ const App: React.FC = () => {
   const { mutate, isLoading } = useMessageClassifier(setPrediction, setError);
 
   // Function to handle form submission
-  const handleSubmit = (message: string) => {
+  const handleSubmit = (message: string, model:string) => {
     // Trigger the mutation when form is submitted
-    mutate(message);
+    mutate({message,model});
   };
 
   return (
