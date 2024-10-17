@@ -18,7 +18,7 @@ const MessageForm: React.FC<MessageFormProps>= ({ onSubmit,isLoading }) => {
       // Pass the message to the parent component
       onSubmit(message, model); 
       // Clear the form after submission
-      // setMessage('');  
+      setMessage('');  
       setModel('');  
     };
   
@@ -33,7 +33,8 @@ const MessageForm: React.FC<MessageFormProps>= ({ onSubmit,isLoading }) => {
                 placeholder="Enter your message"
                 required
             />
-            <Form.Select value={model} onChange={(e) => setModel(e.target.value)} className='mt-3' aria-label="Default select example">
+            <Form.Label htmlFor="model" className='mt-3' >Select model:</Form.Label>
+            <Form.Select id='model' value={model} onChange={(e) => setModel(e.target.value)} aria-label="Default select example">
               <option>Select Model</option>
               <option value="nb_model">Multinomial Naive Bayes</option>
               <option value="rf_model">Random Forest Classifier</option>

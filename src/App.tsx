@@ -2,10 +2,14 @@ import { useState } from "react";
 import MessageForm from "./components/MessageForm"
 import { Row, Col, Card } from 'react-bootstrap';
 import { useMessageClassifier } from "./hooks/useMessageClassifier";
-
+import './App.css'
+export interface Prediction {
+  prediction: string;
+  message: string;
+}
 
 const App: React.FC = () => {
-  const [prediction, setPrediction] = useState<string>('');
+  const [prediction, setPrediction] = useState<Prediction| null>(null);
   const [error, setError] = useState<string | null>(null);
 
   // Using the custom hook to handle the classification API call
@@ -22,7 +26,7 @@ const App: React.FC = () => {
       <Row className="justify-content-center">
       <Col md={5}>
         <Card className='mb-4'>
-          <Card.Header><h1>SMS Classifier</h1></Card.Header>
+          <Card.Header className="d-flex justify-content-center theme"><h1>SMS Classifier</h1></Card.Header>
           <Card.Body>
             {/* MessageForm component for input */}
             <MessageForm onSubmit={handleSubmit} isLoading={isLoading} />
@@ -37,8 +41,12 @@ const App: React.FC = () => {
       <Col md={5}>
         {prediction && (
           <Card>
-            <Card.Header><h3>Result</h3></Card.Header>
-            <Card.Body>Prediction: {prediction}</Card.Body>
+            <Card.Header className=" d-flex justify-content-center theme"><h3>Result</h3></Card.Header>
+            <Card.Body>
+            <b>Message</b>: {prediction.message}
+            <br />
+            <b>Prediction</b>: {prediction.prediction}
+            </Card.Body>
           </Card>
         )}
       </Col>
