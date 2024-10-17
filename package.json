@@ -9,7 +9,6 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "start": "serve -s dist"
-    
   },
   "dependencies": {
     "boostrap": "^2.0.0",
