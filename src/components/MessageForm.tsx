@@ -3,11 +3,6 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
 
-interface MessageFormProps {
-    onSubmit: (message: string, model:string) => void;
-    isLoading:  boolean;
-  }
-
 const MessageForm: React.FC<MessageFormProps>= ({ onSubmit,isLoading }) => {
     const [message, setMessage] = useState<string>('');
     const [model, setModel] = useState<string>('');

@@ -3,10 +3,6 @@ import MessageForm from "./components/MessageForm"
 import { Row, Col, Card } from 'react-bootstrap';
 import { useMessageClassifier } from "./hooks/useMessageClassifier";
 import './App.css'
-export interface Prediction {
-  prediction: string;
-  message: string;
-}
 
 const App: React.FC = () => {
   const [prediction, setPrediction] = useState<Prediction| null>(null);

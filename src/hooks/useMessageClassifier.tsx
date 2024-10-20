@@ -1,7 +1,6 @@
 import { useMutation } from 'react-query';
 import { classifyMessage } from '../services/messageService';
 
-import { Prediction } from '../App';
 // Custom hook that uses React Query's useMutation hook to handle message classification
 // It accepts two setter functions: setPrediction and setError, which are used to update the state
 export const useMessageClassifier = (setPrediction: React.Dispatch<React.SetStateAction<Prediction | null>>, 
